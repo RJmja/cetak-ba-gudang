@@ -1,87 +1,129 @@
-
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Berita Acara Serah Terima Barang — PLN</title>
 <style>
-  h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:var(--font-sans);background:var(--color-background-tertiary)}
-  .app{max-width:860px;margin:0 auto;padding:1rem}
-  .tabs{display:flex;gap:4px;margin-bottom:1rem;border-bottom:0.5px solid var(--color-border-tertiary);padding-bottom:0}
-  .tab{padding:8px 18px;font-size:14px;font-weight:500;border:none;background:none;cursor:pointer;color:var(--color-text-secondary);border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all .15s}
-  .tab.active{color:var(--color-text-primary);border-bottom:2px solid var(--color-text-primary)}
-  .tab:hover:not(.active){color:var(--color-text-primary)}
-  .panel{display:none}.panel.active{display:block}
-  .card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem}
-  .card-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:1rem}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-  .field{display:flex;flex-direction:column;gap:4px}
-  .field label{font-size:13px;color:var(--color-text-secondary)}
-  .field input,.field select,.field textarea{width:100%;padding:7px 10px;font-size:14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);font-family:inherit}
-  .field textarea{resize:vertical;min-height:60px}
-  .barang-row{display:grid;grid-template-columns:30px 1fr 120px 90px 32px;gap:8px;align-items:start;padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
-  .barang-row:last-child{border-bottom:none}
-  .no-badge{width:24px;height:24px;background:var(--color-background-secondary);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--color-text-secondary);flex-shrink:0;margin-top:8px}
-  .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;font-size:14px;font-weight:500;cursor:pointer;color:var(--color-text-primary);transition:all .15s;font-family:inherit}
-  .btn:hover{background:var(--color-background-secondary)}
-  .btn:active{transform:scale(.98)}
-  .btn-primary{background:var(--color-text-primary);color:var(--color-background-primary);border-color:transparent}
-  .btn-primary:hover{opacity:.88;background:var(--color-text-primary)}
-  .btn-danger{color:var(--color-text-danger);border-color:transparent;padding:4px 8px}
-  .btn-danger:hover{background:var(--color-background-danger)}
-  .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f0f2f5;color:#1a1a1a}
 
-  /* PREVIEW / PRINT AREA */
-  #preview-wrap{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem;overflow:auto}
-  .ba-page{width:750px;margin:0 auto;font-family:'Times New Roman',serif;font-size:13px;color:#111;background:#fff;padding:32px 40px;line-height:1.55}
-  .ba-header{display:flex;align-items:center;gap:16px;border-bottom:3px double #111;padding-bottom:12px;margin-bottom:20px}
-  .ba-logo{width:60px;height:60px;object-fit:contain}
-  .ba-logo-placeholder{width:60px;height:60px;background:#005BAC;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0}
-  .ba-logo-placeholder span{color:#fff;font-size:8px;font-family:Arial,sans-serif;font-weight:700;text-align:center;line-height:1.2}
-  .ba-title-text{flex:1;text-align:center}
-  .ba-title-text h1{font-size:16px;font-weight:700;letter-spacing:.05em;margin-bottom:2px}
-  .ba-title-text p{font-size:11px;color:#444}
-  .ba-intro{margin-bottom:14px;font-size:13px}
-  .ba-pihak{margin-bottom:14px}
-  .ba-pihak table td{padding:2px 4px;vertical-align:top}
-  .ba-pihak table td:first-child{width:80px;font-weight:700}
-  .ba-pihak table td:nth-child(2){width:10px}
-  .ba-section-title{font-weight:700;margin:14px 0 8px;font-size:13px}
-  .ba-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:16px}
-  .ba-table th{background:#005BAC;color:#fff;padding:7px 8px;text-align:center;border:1px solid #0047A0;font-size:12px}
-  .ba-table td{border:1px solid #999;padding:6px 8px;vertical-align:middle;text-align:center}
-  .ba-table td:nth-child(2){text-align:left}
-  .ba-table .doc-cell{width:90px;height:70px;padding:4px}
-  .ba-table .doc-cell img{width:100%;height:100%;object-fit:cover;border-radius:2px}
-  .ba-penutup{margin:12px 0 20px;font-size:13px}
-  .ba-ttd{display:flex;justify-content:space-between;margin-top:24px}
-  .ba-ttd-block{text-align:center;width:220px}
-  .ba-ttd-block .ttd-label{font-weight:700;font-size:13px;margin-bottom:4px}
-  .ba-ttd-block .ttd-role{font-size:12px;color:#555;margin-bottom:60px}
-  .ba-ttd-block .ttd-name{font-weight:700;font-size:13px;border-top:1px solid #333;padding-top:4px}
-  .ba-ttd-block .ttd-jabatan{font-size:11px;color:#555}
-  .photo-upload-btn{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;font-size:12px;border:0.5px dashed var(--color-border-secondary);border-radius:4px;cursor:pointer;color:var(--color-text-secondary);background:var(--color-background-secondary);transition:all .15s}
-  .photo-upload-btn:hover{border-color:var(--color-border-primary);color:var(--color-text-primary)}
-  .photo-thumb{width:60px;height:45px;object-fit:cover;border-radius:4px;border:0.5px solid var(--color-border-tertiary)}
-  .photo-cell{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
-  @media print{
-    .tabs,.actions,#form-panel,.card-title,.btn{display:none!important}
-    #preview-panel{display:block!important}
-    #preview-wrap{border:none;padding:0}
-    .ba-page{width:100%;padding:20px;box-shadow:none}
-  }
+/* ===== APP SHELL ===== */
+.app{max-width:900px;margin:0 auto;padding:16px}
+.app-header{background:#005BAC;color:#fff;padding:14px 20px;border-radius:10px;display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.app-header .logo{width:44px;height:44px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.app-header h1{font-size:16px;font-weight:700;letter-spacing:.03em}
+.app-header p{font-size:12px;opacity:.85;margin-top:2px}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:#fff;border-radius:10px;padding:6px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.tab{flex:1;padding:9px;text-align:center;font-size:13px;font-weight:600;border-radius:7px;border:none;background:none;cursor:pointer;color:#666;transition:all .15s}
+.tab.active{background:#005BAC;color:#fff}
+.panel{display:none}.panel.active{display:block}
+
+/* CARDS */
+.card{background:#fff;border-radius:10px;padding:16px 18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.card-title{font-size:11px;font-weight:700;color:#005BAC;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid #e8f0fb}
+
+/* FORM */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:600px){.grid2,.grid3{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:12px;font-weight:600;color:#555}
+.field input,.field select,.field textarea{padding:8px 10px;font-size:13px;border:1.5px solid #dde3ee;border-radius:7px;background:#fafbfd;color:#1a1a1a;font-family:inherit;transition:border .15s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#005BAC;outline:none;background:#fff}
+.field textarea{resize:vertical;min-height:56px}
+
+/* BARANG ROWS */
+.barang-row{display:grid;grid-template-columns:28px 1fr 130px 80px 34px;gap:8px;align-items:start;padding:10px 0;border-bottom:1px solid #f0f2f5}
+.barang-row:last-child{border-bottom:none}
+@media(max-width:600px){.barang-row{grid-template-columns:1fr;gap:6px}}
+.no-badge{width:26px;height:26px;background:#e8f0fb;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#005BAC;flex-shrink:0;margin-top:7px}
+.photo-cell{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.photo-thumb{width:62px;height:48px;object-fit:cover;border-radius:5px;border:1.5px solid #dde3ee}
+.upload-label{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;font-size:11px;font-weight:600;border:1.5px dashed #b0bcd4;border-radius:5px;cursor:pointer;color:#666;background:#f5f7fb;transition:all .15s}
+.upload-label:hover{border-color:#005BAC;color:#005BAC;background:#e8f0fb}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;border:1.5px solid #dde3ee;background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:#333;transition:all .15s;font-family:inherit}
+.btn:hover{background:#f0f2f5;border-color:#bbb}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:#005BAC;color:#fff;border-color:#005BAC}
+.btn-primary:hover{background:#004a91;border-color:#004a91}
+.btn-print{background:#1a7a2e;color:#fff;border-color:#1a7a2e;font-size:14px;padding:11px 24px}
+.btn-print:hover{background:#155f24}
+.btn-danger{color:#c0392b;border:none;background:none;padding:5px 8px;font-size:18px}
+.btn-danger:hover{background:#fde8e8;border-radius:6px}
+.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
+.info-badge{display:inline-flex;align-items:center;gap:5px;background:#e8f0fb;color:#005BAC;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;margin-bottom:12px}
+
+/* ===== PREVIEW / PRINT ===== */
+#preview-wrap{background:#e8eaf0;padding:16px;border-radius:10px}
+.ba-page{width:100%;max-width:740px;margin:0 auto;background:#fff;padding:36px 44px;font-family:'Times New Roman',Times,serif;font-size:13px;color:#111;line-height:1.6;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+.ba-header-row{display:flex;align-items:center;gap:16px;padding-bottom:12px;border-bottom:3px double #111;margin-bottom:20px}
+.ba-logo-box{width:64px;height:64px;background:#005BAC;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
+.ba-logo-box span{color:#fff;font-family:Arial,sans-serif;font-weight:900;font-size:13px;line-height:1}
+.ba-logo-box small{color:#FFD700;font-family:Arial,sans-serif;font-size:9px;margin-top:2px}
+.ba-title-center{flex:1;text-align:center}
+.ba-title-center h1{font-size:15px;font-weight:900;letter-spacing:.06em;margin-bottom:2px}
+.ba-title-center p{font-size:11px;color:#555}
+.ba-intro{margin-bottom:14px}
+.ba-pihak{margin-bottom:12px}
+.ba-pihak table{border-collapse:collapse}
+.ba-pihak td{padding:1px 4px;vertical-align:top}
+.ba-pihak td:first-child{width:75px;font-weight:700}
+.ba-pihak td:nth-child(2){width:12px}
+.ba-pihak .label-pihak{font-weight:700;margin-top:4px;font-size:13px}
+.ba-narasi{margin:12px 0 14px;font-size:13px}
+.ba-table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px}
+.ba-table th{background:#005BAC;color:#fff;padding:8px 6px;text-align:center;border:1px solid #004a91;font-size:12px}
+.ba-table td{border:1px solid #999;padding:6px 8px;vertical-align:middle;text-align:center}
+.ba-table td.left{text-align:left}
+.ba-table .doc-img{width:80px;height:60px;object-fit:cover;border-radius:3px}
+.ba-penutup{font-size:13px;margin-bottom:28px}
+.ba-ttd{display:flex;justify-content:space-between}
+.ba-ttd-block{text-align:center;width:200px}
+.ba-ttd-block .lbl{font-weight:700;font-size:13px}
+.ba-ttd-block .role{font-size:12px;color:#444;margin-bottom:64px}
+.ba-ttd-block .nm{font-weight:700;font-size:13px;border-top:1px solid #333;display:inline-block;padding-top:3px;min-width:140px}
+.ba-ttd-block .jbt{font-size:11px;color:#555;margin-top:2px}
+.ba-meta{font-size:11px;color:#888;text-align:right;margin-top:18px;padding-top:8px;border-top:1px solid #ddd}
+
+/* ===== PRINT STYLES ===== */
+@media print{
+  body{background:#fff}
+  .app-header,.tabs,.actions,.card,.info-badge,#form-panel{display:none!important}
+  #preview-panel{display:block!important}
+  #preview-wrap{background:none;padding:0}
+  .ba-page{box-shadow:none;padding:20px;max-width:100%}
+}
 </style>
-
-<h2 class="sr-only">Aplikasi Berita Acara Serah Terima Barang Gudang PLN</h2>
-
+</head>
+<body>
 <div class="app">
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('form')"><i class="ti ti-pencil" aria-hidden="true"></i> Form Input</button>
-    <button class="tab" onclick="switchTab('preview')"><i class="ti ti-file-text" aria-hidden="true"></i> Preview BA</button>
+  <div class="app-header">
+    <div class="logo">⚡</div>
+    <div>
+      <h1>Berita Acara Serah Terima Barang</h1>
+      <p>Aplikasi Cetak BA Gudang — PLN</p>
+    </div>
   </div>
 
-  <!-- FORM PANEL -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('form')">✏️ Form Input</button>
+    <button class="tab" onclick="switchTab('preview')">📄 Preview &amp; Cetak</button>
+  </div>
+
+  <!-- ======= FORM PANEL ======= -->
   <div id="form-panel" class="panel active">
+
+    <div id="auto-fill-badge" style="display:none" class="info-badge">
+      ✅ Data terisi otomatis dari AppSheet
+    </div>
+
     <div class="card">
-      <div class="card-title">Info transaksi</div>
+      <div class="card-title">📋 Info Transaksi</div>
       <div class="grid3">
         <div class="field"><label>ID Transaksi</label><input id="f-id" placeholder="cth: 30c8ceac" /></div>
         <div class="field"><label>Tanggal</label><input type="date" id="f-tanggal" /></div>
@@ -90,222 +132,246 @@
     </div>
 
     <div class="card">
-      <div class="card-title">Pihak pertama (yang menyerahkan)</div>
+      <div class="card-title">👤 Pihak Pertama — Yang Menyerahkan</div>
       <div class="grid3">
-        <div class="field"><label>Nama</label><input id="p1-nama" placeholder="Nama lengkap" /></div>
-        <div class="field"><label>Jabatan</label><input id="p1-jabatan" placeholder="Jabatan" /></div>
-        <div class="field"><label>Alamat / Unit</label><input id="p1-alamat" placeholder="Unit/Alamat" /></div>
+        <div class="field"><label>Nama Lengkap</label><input id="p1-nama" placeholder="Nama lengkap" /></div>
+        <div class="field"><label>Jabatan</label><input id="p1-jabatan" placeholder="cth: SPV K3LH" /></div>
+        <div class="field"><label>Unit / Alamat</label><input id="p1-alamat" placeholder="cth: UL MAJALAYA" /></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Pihak kedua (yang menerima)</div>
+      <div class="card-title">👤 Pihak Kedua — Yang Menerima</div>
       <div class="grid3">
-        <div class="field"><label>Nama</label><input id="p2-nama" placeholder="Nama lengkap" /></div>
-        <div class="field"><label>Jabatan</label><input id="p2-jabatan" placeholder="Jabatan" /></div>
-        <div class="field"><label>Alamat / Unit</label><input id="p2-alamat" placeholder="Unit/Alamat" /></div>
+        <div class="field"><label>Nama Lengkap</label><input id="p2-nama" placeholder="Nama lengkap" /></div>
+        <div class="field"><label>Jabatan</label><input id="p2-jabatan" placeholder="cth: KOORDINATOR ULP" /></div>
+        <div class="field"><label>Unit / Alamat</label><input id="p2-alamat" placeholder="cth: ULP RANCAEKEK" /></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Daftar barang</div>
+      <div class="card-title">📦 Daftar Barang</div>
       <div id="barang-list"></div>
       <div style="margin-top:12px">
-        <button class="btn" onclick="addBarang()"><i class="ti ti-plus" aria-hidden="true"></i> Tambah barang</button>
+        <button class="btn" onclick="addBarang()">＋ Tambah Barang</button>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Keterangan</div>
+      <div class="card-title">📝 Keterangan & Catatan</div>
       <div class="grid2">
-        <div class="field"><label>Keterangan</label><input id="f-keterangan" placeholder="cth: RUSAK/TEMUAN/PEMAKAIAN" /></div>
-        <div class="field"><label>Catatan tambahan</label><textarea id="f-catatan" placeholder="Catatan opsional..."></textarea></div>
+        <div class="field"><label>Keterangan</label><input id="f-ket" placeholder="cth: RUSAK / TEMUAN / PEMAKAIAN" /></div>
+        <div class="field"><label>Catatan Tambahan</label><textarea id="f-catatan" placeholder="Catatan opsional..."></textarea></div>
       </div>
     </div>
 
     <div class="actions">
-      <button class="btn" onclick="clearForm()"><i class="ti ti-trash" aria-hidden="true"></i> Bersihkan</button>
-      <button class="btn btn-primary" onclick="generatePreview()"><i class="ti ti-eye" aria-hidden="true"></i> Preview BA →</button>
+      <button class="btn" onclick="clearForm()">🗑️ Bersihkan</button>
+      <button class="btn btn-primary" onclick="doPreview()">👁️ Preview BA →</button>
     </div>
   </div>
 
-  <!-- PREVIEW PANEL -->
+  <!-- ======= PREVIEW PANEL ======= -->
   <div id="preview-panel" class="panel">
     <div class="actions" style="margin-bottom:12px">
-      <button class="btn" onclick="switchTab('form')"><i class="ti ti-arrow-left" aria-hidden="true"></i> Edit data</button>
-      <button class="btn btn-primary" onclick="printBA()"><i class="ti ti-printer" aria-hidden="true"></i> Cetak / Simpan PDF</button>
+      <button class="btn" onclick="switchTab('form')">← Edit Data</button>
+      <button class="btn btn-print" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
     </div>
     <div id="preview-wrap">
       <div class="ba-page" id="ba-content">
-        <p style="color:#999;text-align:center;padding:40px 0">Isi form terlebih dahulu, lalu klik "Preview BA"</p>
+        <p style="text-align:center;color:#aaa;padding:40px">Isi form lalu klik "Preview BA"</p>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-let barangItems = [];
-let photoDataMap = {};
+// ============================================================
+//  STATE
+// ============================================================
+var items = [];
+var photos = {};
 
-function switchTab(t) {
-  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active', (i==0&&t=='form')||(i==1&&t=='preview')));
-  document.getElementById('form-panel').classList.toggle('active', t=='form');
-  document.getElementById('preview-panel').classList.toggle('active', t=='preview');
+// ============================================================
+//  BACA URL PARAMETER (dari AppSheet)
+// ============================================================
+function readURL() {
+  var p = new URLSearchParams(window.location.search);
+  if (!p.toString()) return;
+
+  var set = function(id, val) { var el = document.getElementById(id); if (el && val) el.value = val; };
+
+  set('f-id',      p.get('id'));
+  set('f-tanggal', p.get('tanggal'));
+  set('f-unit',    p.get('unit'));
+  set('p1-nama',   p.get('p1nama'));
+  set('p1-jabatan',p.get('p1jabatan'));
+  set('p1-alamat', p.get('p1alamat'));
+  set('p2-nama',   p.get('p2nama'));
+  set('p2-jabatan',p.get('p2jabatan'));
+  set('p2-alamat', p.get('p2alamat'));
+  set('f-ket',     p.get('keterangan'));
+  set('f-catatan', p.get('catatan'));
+
+  // Barang bisa berupa beberapa item, dipisah tanda |
+  // Format: barang=NAMA1|NAMA2   merek=MEREK1|MEREK2   jumlah=1|2
+  var namaList   = (p.get('barang')  || '').split('|').filter(Boolean);
+  var merekList  = (p.get('merek')   || '').split('|').filter(Boolean);
+  var jumlahList = (p.get('jumlah')  || '').split('|').filter(Boolean);
+
+  items = [];
+  for (var i = 0; i < namaList.length; i++) {
+    items.push({
+      id: Date.now() + i,
+      nama:   namaList[i]   || '',
+      merek:  merekList[i]  || '',
+      jumlah: jumlahList[i] || '1'
+    });
+  }
+  if (!items.length) items.push({id:Date.now(),nama:'',merek:'',jumlah:'1'});
+
+  renderList();
+  document.getElementById('auto-fill-badge').style.display = 'inline-flex';
 }
 
-function addBarang(data) {
-  const id = Date.now();
-  barangItems.push({id, nama:'', merek:'', jumlah:'1', foto:null});
-  renderBarangList();
-  return id;
-}
-
-function removeBarang(id) {
-  barangItems = barangItems.filter(b=>b.id!==id);
-  delete photoDataMap[id];
-  renderBarangList();
-}
-
-function renderBarangList() {
-  const el = document.getElementById('barang-list');
-  if (!barangItems.length) {
-    el.innerHTML = '<p style="font-size:13px;color:var(--color-text-secondary);padding:8px 0">Belum ada barang. Klik "Tambah barang".</p>';
+// ============================================================
+//  RENDER DAFTAR BARANG
+// ============================================================
+function renderList() {
+  var el = document.getElementById('barang-list');
+  if (!items.length) {
+    el.innerHTML = '<p style="font-size:13px;color:#999;padding:8px 0">Belum ada barang. Klik Tambah Barang.</p>';
     return;
   }
-  el.innerHTML = barangItems.map((b,i)=>`
-    <div class="barang-row" id="row-${b.id}">
-      <div class="no-badge">${i+1}</div>
-      <div class="field"><label>Nama barang</label><input value="${b.nama}" oninput="updateBarang(${b.id},'nama',this.value)" placeholder="cth: METERAN 5 METER" /></div>
-      <div class="field"><label>Merek / Type / SN</label><input value="${b.merek}" oninput="updateBarang(${b.id},'merek',this.value)" placeholder="Merek / SN" /></div>
-      <div class="field">
-        <label>Jumlah</label>
-        <input type="number" value="${b.jumlah}" min="1" oninput="updateBarang(${b.id},'jumlah',this.value)" />
-        <div class="photo-cell" style="margin-top:6px">
-          ${photoDataMap[b.id] ? `<img class="photo-thumb" src="${photoDataMap[b.id]}" alt="foto" />` : ''}
-          <label class="photo-upload-btn"><i class="ti ti-camera" aria-hidden="true"></i> Foto<input type="file" accept="image/*" style="display:none" onchange="handlePhoto(${b.id},this)" /></label>
-        </div>
-      </div>
-      <button class="btn btn-danger" onclick="removeBarang(${b.id})" aria-label="Hapus barang"><i class="ti ti-x" aria-hidden="true"></i></button>
-    </div>
-  `).join('');
+  el.innerHTML = items.map(function(b, i) {
+    return '<div class="barang-row" id="row-' + b.id + '">' +
+      '<div class="no-badge">' + (i+1) + '</div>' +
+      '<div class="field"><label>Nama Barang</label>' +
+        '<input value="' + esc(b.nama) + '" oninput="upd(' + b.id + ',\'nama\',this.value)" placeholder="Nama barang" /></div>' +
+      '<div class="field"><label>Merek / Type / SN</label>' +
+        '<input value="' + esc(b.merek) + '" oninput="upd(' + b.id + ',\'merek\',this.value)" placeholder="Merek / SN" /></div>' +
+      '<div class="field"><label>Jml</label>' +
+        '<input type="number" min="1" value="' + esc(b.jumlah) + '" oninput="upd(' + b.id + ',\'jumlah\',this.value)" />' +
+        '<div class="photo-cell">' +
+          (photos[b.id] ? '<img class="photo-thumb" src="' + photos[b.id] + '" alt="foto" />' : '') +
+          '<label class="upload-label">📷 Foto<input type="file" accept="image/*" style="display:none" onchange="loadPhoto(' + b.id + ',this)" /></label>' +
+        '</div></div>' +
+      '<button class="btn-danger" onclick="delBarang(' + b.id + ')" title="Hapus">✕</button>' +
+    '</div>';
+  }).join('');
 }
 
-function updateBarang(id, field, val) {
-  const b = barangItems.find(x=>x.id===id);
-  if (b) b[field] = val;
+function esc(s) { return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function addBarang() { items.push({id:Date.now(),nama:'',merek:'',jumlah:'1'}); renderList(); }
+function delBarang(id) { items = items.filter(function(x){return x.id!==id;}); delete photos[id]; renderList(); }
+function upd(id,f,v) { var b=items.find(function(x){return x.id===id;}); if(b) b[f]=v; }
+function loadPhoto(id,inp) {
+  if (!inp.files[0]) return;
+  var r = new FileReader();
+  r.onload = function(e){ photos[id] = e.target.result; renderList(); };
+  r.readAsDataURL(inp.files[0]);
 }
 
-function handlePhoto(id, input) {
-  if (!input.files[0]) return;
-  const reader = new FileReader();
-  reader.onload = e => { photoDataMap[id] = e.target.result; renderBarangList(); };
-  reader.readAsDataURL(input.files[0]);
-}
+// ============================================================
+//  HELPERS
+// ============================================================
+function val(id) { var el=document.getElementById(id); return el ? el.value : ''; }
 
-function fmtTanggal(s) {
+function fmtTgl(s) {
   if (!s) return '_______________';
-  const d = new Date(s);
-  const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][d.getDay()];
-  const bln = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][d.getMonth()];
-  return `${hari}, ${d.getDate()} ${bln} ${d.getFullYear()}`;
+  var d = new Date(s);
+  var hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][d.getDay()];
+  var bln  = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][d.getMonth()];
+  return hari + ', ' + d.getDate() + ' ' + bln + ' ' + d.getFullYear();
 }
 
-function v(id) { return (document.getElementById(id)||{}).value || ''; }
-
-function generatePreview() {
-  const p1={nama:v('p1-nama')||'_______________',jabatan:v('p1-jabatan')||'_______________',alamat:v('p1-alamat')||'_______________'};
-  const p2={nama:v('p2-nama')||'_______________',jabatan:v('p2-jabatan')||'_______________',alamat:v('p2-alamat')||'_______________'};
-  const tanggal = fmtTanggal(v('f-tanggal'));
-  const unit = v('f-unit') || '_______________';
-
-  const rows = barangItems.map((b,i)=>`
-    <tr>
-      <td>${i+1}</td>
-      <td><strong>${b.nama||'—'}</strong></td>
-      <td>${b.merek||'—'} / ${b.jumlah||1}</td>
-      <td class="doc-cell">${photoDataMap[b.id]?`<img src="${photoDataMap[b.id]}" alt="dok" style="width:80px;height:60px;object-fit:cover" />`:'<span style="color:#bbb;font-size:10px">—</span>'}</td>
-    </tr>
-  `).join('');
-
-  document.getElementById('ba-content').innerHTML = `
-    <div class="ba-header">
-      <div class="ba-logo-placeholder"><span>PLN<br>⚡</span></div>
-      <div class="ba-title-text">
-        <h1>BERITA ACARA SERAH TERIMA BARANG</h1>
-        <p>Tujuan Unit: ${unit}</p>
-      </div>
-    </div>
-
-    <div class="ba-intro">
-      Kami yang bertanda tangan dibawah ini, Pada hari ini <strong>${tanggal}</strong> :
-    </div>
-
-    <div class="ba-pihak">
-      <table><tbody>
-        <tr><td>Nama</td><td>:</td><td><strong>${p1.nama}</strong></td></tr>
-        <tr><td>Jabatan</td><td>:</td><td>${p1.jabatan}</td></tr>
-        <tr><td>Alamat</td><td>:</td><td>${p1.alamat}</td></tr>
-      </tbody></table>
-      <p style="margin-top:4px">Selanjutnya disebut <strong>PIHAK PERTAMA</strong></p>
-    </div>
-
-    <div class="ba-pihak">
-      <table><tbody>
-        <tr><td>Nama</td><td>:</td><td><strong>${p2.nama}</strong></td></tr>
-        <tr><td>Jabatan</td><td>:</td><td>${p2.jabatan}</td></tr>
-        <tr><td>Alamat</td><td>:</td><td>${p2.alamat}</td></tr>
-      </tbody></table>
-      <p style="margin-top:4px">Selanjutnya disebut <strong>PIHAK KEDUA</strong></p>
-    </div>
-
-    <p style="margin:12px 0;font-size:13px"><strong>PIHAK PERTAMA</strong> menyerahkan barang kepada <strong>PIHAK KEDUA</strong>, dan <strong>PIHAK KEDUA</strong> menyatakan telah menerima barang dari <strong>PIHAK PERTAMA</strong> berupa daftar terlampir :</p>
-
-    <table class="ba-table">
-      <thead><tr><th style="width:36px">NO</th><th>NAMA BARANG</th><th style="width:130px">MEREK / JUMLAH</th><th style="width:110px">DOKUMENTASI</th></tr></thead>
-      <tbody>${rows || '<tr><td colspan="4" style="color:#bbb">— Tidak ada barang —</td></tr>'}</tbody>
-    </table>
-
-    ${v('f-keterangan')||v('f-catatan')?`<p style="font-size:12px;color:#444;margin-bottom:12px"><strong>Keterangan:</strong> ${v('f-keterangan')} ${v('f-catatan')?'| '+v('f-catatan'):''}</p>`:''}
-
-    <div class="ba-penutup">
-      Demikianlah berita acara serah terima barang ini di perbuat oleh kedua belah pihak, adapun barang-barang tersebut dalam keadaan baik dan cukup.
-    </div>
-
-    <div class="ba-ttd">
-      <div class="ba-ttd-block">
-        <div class="ttd-label">Yang Menyerahkan :</div>
-        <div class="ttd-role">PIHAK PERTAMA</div>
-        <div class="ttd-name">( ${p1.nama} )</div>
-        <div class="ttd-jabatan">${p1.jabatan}</div>
-      </div>
-      <div class="ba-ttd-block">
-        <div class="ttd-label">Yang Menerima :</div>
-        <div class="ttd-role">PIHAK KEDUA</div>
-        <div class="ttd-name">( ${p2.nama} )</div>
-        <div class="ttd-jabatan">${p2.jabatan}</div>
-      </div>
-    </div>
-  `;
-  switchTab('preview');
-}
-
-function printBA() {
-  window.print();
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach(function(el,i){
+    el.classList.toggle('active', (i===0&&t==='form')||(i===1&&t==='preview'));
+  });
+  document.getElementById('form-panel').classList.toggle('active', t==='form');
+  document.getElementById('preview-panel').classList.toggle('active', t==='preview');
 }
 
 function clearForm() {
-  ['f-id','f-tanggal','f-unit','p1-nama','p1-jabatan','p1-alamat','p2-nama','p2-jabatan','p2-alamat','f-keterangan','f-catatan'].forEach(id=>{
-    const el=document.getElementById(id); if(el) el.value='';
-  });
-  barangItems = [];
-  photoDataMap = {};
-  renderBarangList();
+  ['f-id','f-tanggal','f-unit','p1-nama','p1-jabatan','p1-alamat','p2-nama','p2-jabatan','p2-alamat','f-ket','f-catatan']
+    .forEach(function(id){ var el=document.getElementById(id); if(el) el.value=''; });
+  items=[]; photos={};
+  renderList();
+  document.getElementById('auto-fill-badge').style.display='none';
 }
 
-// Init
-renderBarangList();
-// Set today
+// ============================================================
+//  GENERATE PREVIEW BA
+// ============================================================
+function doPreview() {
+  var p1 = { nama: val('p1-nama')||'_______________', jabatan: val('p1-jabatan')||'_______________', alamat: val('p1-alamat')||'_______________' };
+  var p2 = { nama: val('p2-nama')||'_______________', jabatan: val('p2-jabatan')||'_______________', alamat: val('p2-alamat')||'_______________' };
+  var tgl  = fmtTgl(val('f-tanggal'));
+  var unit = val('f-unit') || '_______________';
+  var idTx = val('f-id');
+
+  var rows = items.map(function(b,i){
+    return '<tr>' +
+      '<td>' + (i+1) + '</td>' +
+      '<td class="left"><strong>' + (b.nama||'—') + '</strong></td>' +
+      '<td>' + (b.merek||'—') + ' / ' + (b.jumlah||1) + '</td>' +
+      '<td>' + (photos[b.id] ? '<img class="doc-img" src="'+photos[b.id]+'" alt="dok" />' : '<span style="color:#ccc;font-size:11px">—</span>') + '</td>' +
+    '</tr>';
+  }).join('');
+
+  var ket = val('f-ket');
+  var cat = val('f-catatan');
+
+  document.getElementById('ba-content').innerHTML =
+    '<div class="ba-header-row">' +
+      '<div class="ba-logo-box"><span>PLN</span><small>⚡ ES</small></div>' +
+      '<div class="ba-title-center"><h1>BERITA ACARA SERAH TERIMA BARANG</h1><p>Tujuan Unit: ' + unit + (idTx?' &nbsp;|&nbsp; ID: '+idTx:'') + '</p></div>' +
+    '</div>' +
+
+    '<p class="ba-intro">Kami yang bertanda tangan dibawah ini, Pada hari ini <strong>' + tgl + '</strong> :</p>' +
+
+    '<div class="ba-pihak"><table><tbody>' +
+      '<tr><td>Nama</td><td>:</td><td><strong>' + p1.nama + '</strong></td></tr>' +
+      '<tr><td>Jabatan</td><td>:</td><td>' + p1.jabatan + '</td></tr>' +
+      '<tr><td>Alamat</td><td>:</td><td>' + p1.alamat + '</td></tr>' +
+    '</tbody></table><p class="label-pihak">Selanjutnya disebut <strong>PIHAK PERTAMA</strong></p></div>' +
+
+    '<div class="ba-pihak"><table><tbody>' +
+      '<tr><td>Nama</td><td>:</td><td><strong>' + p2.nama + '</strong></td></tr>' +
+      '<tr><td>Jabatan</td><td>:</td><td>' + p2.jabatan + '</td></tr>' +
+      '<tr><td>Alamat</td><td>:</td><td>' + p2.alamat + '</td></tr>' +
+    '</tbody></table><p class="label-pihak">Selanjutnya disebut <strong>PIHAK KEDUA</strong></p></div>' +
+
+    '<p class="ba-narasi"><strong>PIHAK PERTAMA</strong> menyerahkan barang kepada <strong>PIHAK KEDUA</strong>, dan <strong>PIHAK KEDUA</strong> menyatakan telah menerima barang dari <strong>PIHAK PERTAMA</strong> berupa daftar terlampir :</p>' +
+
+    '<table class="ba-table"><thead><tr>' +
+      '<th style="width:36px">NO</th><th>NAMA BARANG</th><th style="width:140px">MEREK / JUMLAH</th><th style="width:110px">DOKUMENTASI</th>' +
+    '</tr></thead><tbody>' +
+      (rows || '<tr><td colspan="4" style="color:#bbb">— Tidak ada barang —</td></tr>') +
+    '</tbody></table>' +
+
+    (ket||cat ? '<p style="font-size:12px;color:#444;margin-bottom:14px"><strong>Keterangan:</strong> ' + (ket||'') + (cat?' &nbsp;|&nbsp; '+cat:'') + '</p>' : '') +
+
+    '<p class="ba-penutup">Demikianlah berita acara serah terima barang ini di perbuat oleh kedua belah pihak, adapun barang-barang tersebut dalam keadaan baik dan cukup.</p>' +
+
+    '<div class="ba-ttd">' +
+      '<div class="ba-ttd-block"><div class="lbl">Yang Menyerahkan :</div><div class="role">PIHAK PERTAMA</div><div class="nm">( ' + p1.nama + ' )</div><div class="jbt">' + p1.jabatan + '</div></div>' +
+      '<div class="ba-ttd-block"><div class="lbl">Yang Menerima :</div><div class="role">PIHAK KEDUA</div><div class="nm">( ' + p2.nama + ' )</div><div class="jbt">' + p2.jabatan + '</div></div>' +
+    '</div>' +
+
+    '<div class="ba-meta">Dicetak: ' + new Date().toLocaleString('id-ID') + '</div>';
+
+  switchTab('preview');
+}
+
+// ============================================================
+//  INIT
+// ============================================================
 document.getElementById('f-tanggal').value = new Date().toISOString().split('T')[0];
-// Add 1 empty row
-addBarang();
+items.push({id: Date.now(), nama:'', merek:'', jumlah:'1'});
+renderList();
+readURL(); // baca data dari AppSheet kalau ada
 </script>
+</body>
+</html>
